@@ -18,6 +18,7 @@ It is recommended for the src directory to be used for source code management.  
 2. A default company is recommended. Set a default company using the WCPCLI instructions.  To locate the code, on developer.workday.com, click *Account* and location your *Organization Short Id*.
 
 Example: `wcpcli config:set defaultCompanyShortId xxxxxx`
+
 3. Place the file, wcp_app_script.py, in the WCPCLI /bin directory.  On Windows, the default is `C:\Program Files\Workday\wcpcli\bin`
 4. Edit the file, wcp_app_script.py, with your favorite text editor and set the DEFAULT_DOWNLOAD_DIRECTORY to your browser's default download directory.
 5. Follow the steps below for any application that uses this script.
@@ -33,6 +34,6 @@ Example: `wcpcli config:set defaultCompanyShortId xxxxxx`
 
 `"{wcpcli bin directory}\wcp_app_script.py" "{application reference id}" "{current application directory}"`
 
-Example:  "C:\Program Files\Workday\wcpcli\bin\wcp_app_script.py" "positionmanagement_xzkyht" "C:\Workday_Extend\positionmanagement_xzkyht"
+Example:  `"C:\Program Files\Workday\wcpcli\bin\wcp_app_script.py" "positionmanagement_xzkyht" "C:\Workday_Extend\positionmanagement_xzkyht"`
 
    

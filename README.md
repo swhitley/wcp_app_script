@@ -16,6 +16,7 @@ It is recommended for the src directory to be used for source code management.  
 ## Script Installation
 1. Install WCPCLI using the standard installation for your os.  Note that this script has been primarily tested on Windows.  https://developer.workday.com/documentation/nmq1528733132785/GetStartedwiththeWorkdayCloudPlatformCLI
 2. A default company is recommended. Set a default company using the WCPCLI instructions.  To locate the code, on developer.workday.com, click *Account* and location your *Organization Short Id*.
+
 Example: `wcpcli config:set defaultCompanyShortId xxxxxx`
 3. Place the file, wcp_app_script.py, in the WCPCLI /bin directory.  On Windows, the default is `C:\Program Files\Workday\wcpcli\bin`
 4. Edit the file, wcp_app_script.py, with your favorite text editor and set the DEFAULT_DOWNLOAD_DIRECTORY to your browser's default download directory.
@@ -29,7 +30,9 @@ Example: `wcpcli config:set defaultCompanyShortId xxxxxx`
 5. Before executing the script, make sure you are signed on to developer.workday.com.  The script opens a browser window and relies on your existing signon.
 6. Windows users can double-click the file, wcp_app_script.com, to execute the commands.
 7. You can also run the script from the command line:
+
 `"{wcpcli bin directory}\wcp_app_script.py" "{application reference id}" "{current application directory}"`
+
 Example:  "C:\Program Files\Workday\wcpcli\bin\wcp_app_script.py" "positionmanagement_xzkyht" "C:\Workday_Extend\positionmanagement_xzkyht"
 
    

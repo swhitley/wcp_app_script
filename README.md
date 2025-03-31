@@ -29,7 +29,7 @@ Example: `wcpcli config:set defaultCompanyShortId xxxxxx`
 3. Update wcp_app_script.cmd and enter the Application's Reference Id in APP_REFERENCE_ID.
 4. If you are not using Windows, you can create a similar command script or enter the commands on the command line.
 5. Before executing the script, make sure you are signed on to developer.workday.com.  The script opens a browser window and relies on your existing signon.
-6. Windows users can double-click the file, wcp_app_script.com, to execute the commands.
+6. Windows users can double-click the file, wcp_app_script.cmd, to execute the commands.
 7. You can also run the script from the command line:
 
 `"{wcpcli bin directory}\wcp_app_script.py" "{application reference id}" "{current application directory}"`

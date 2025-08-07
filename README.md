@@ -10,6 +10,7 @@ This script is designed to automate the process of downloading an application fr
 6. Delete any old files in the src directory.
 7. Extract the downloaded files to the src directory.
 8. Rename the application metadata file and site metadata file (.amd and .smd) for convenient comparison to versions of the application that may have a different reference id.
+9. Convert .orchestration and .suborchestration files using pretty-print for improved line comparisons.
 
 It is recommended for the src directory to be used for source code management.  The process has been tested with GitHub where the src directory is the location of the local repository.
 

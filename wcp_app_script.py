@@ -20,6 +20,7 @@ DEFAULT_DOWNLOAD_DIRECTORY = "C:/Users/swhit/Downloads"
 WCPCLI_BASE = "wcpcli"
 ZIP_EXTENSION = "*.zip"
 AMD_SMD_EXTENSIONS = ("./presentation/*.amd", "./presentation/*.smd")
+ORCHESTRATE_EXTENSIONS = ("./orchestration/*.orchestration", "./orchestration/*.suborchestration")
 DOWNLOAD_TIMEOUT_SECONDS = 60
 ARCHIVE_DIRECTORY = "archive"
 SRC_DIRECTORY = "src"
@@ -187,6 +188,9 @@ def process_download(downloaded_file, src_directory, archive_directory):
     logging.info(f"Renaming amd and smd files.")
     rename_amd_smd_files(src_directory)
     
+    logging.info(f"Pretty printing orchestration files.")
+    pretty_print_orchestrations(src_directory)
+    
 
 def rename_amd_smd_files(directory, extensions=AMD_SMD_EXTENSIONS):
     """Renames .amd and .smd files in a directory."""
@@ -216,6 +220,37 @@ def rename_amd_smd_files(directory, extensions=AMD_SMD_EXTENSIONS):
             except Exception as e:
                 logging.error(f"Failed to rename '{filepath}': {e}")
 
+def pretty_print_orchestrations(directory, extensions=ORCHESTRATE_EXTENSIONS):
+    """Pretty Prints Orchestration Files"""
+
+    for extension_pattern in extensions:
+        pattern = os.path.join(directory, extension_pattern)
+        matching_files = glob.glob(pattern)
+
+        for filepath in matching_files:
+            try:
+                # Read the file content
+                with open(filepath, 'r', encoding='utf-8') as file:
+                    content = file.read()
+                
+                # Try to parse and pretty-print as JSON
+                try:
+                    parsed_json = json.loads(content)
+                    pretty_content = json.dumps(parsed_json, indent=2, ensure_ascii=False)
+                    
+                    # Write the pretty-printed content back to the same file
+                    with open(filepath, 'w', encoding='utf-8') as file:
+                        file.write(pretty_content)
+                    
+                    logging.info(f"Pretty-printed orchestration file: {filepath}")
+                    
+                except json.JSONDecodeError as json_error:
+                    logging.warning(f"File '{filepath}' is not valid JSON, skipping pretty-print: {json_error}")
+                    
+            except Exception as e:
+                logging.error(f"Failed to pretty-print '{filepath}': {e}")                
+                
+
 def rename_archive(filepath, archive_directory):
     """Moves the file to the archive directory."""
 
@@ -228,7 +263,7 @@ def rename_archive(filepath, archive_directory):
     
     return new_filepath
 
-def wcp_app_script(reference_id, app_directory, download_directory):
+def wcp_app_download(reference_id, app_directory, download_directory):
     """
     Downloads source files from developer.workday.com with wcpcli.
     """
@@ -267,7 +302,7 @@ def wcp_app_script(reference_id, app_directory, download_directory):
    
 if __name__ == "__main__":
     if len(sys.argv) < 3 or len(sys.argv) > 4:
-        print("Usage: python wcp_app_script.py <reference_id> <app_directory> [<download_directory>]")
+        print("Usage: python wcp_app_download.py <reference_id> <app_directory> [<download_directory>]")
         sys.exit(1)
 
     reference_id_to_lookup = sys.argv[1]
@@ -280,4 +315,4 @@ if __name__ == "__main__":
     else:
         download_directory = DEFAULT_DOWNLOAD_DIRECTORY # Use the default if not provided
 
-    wcp_app_script(reference_id_to_lookup, app_directory, download_directory)    
+    wcp_app_download(reference_id_to_lookup, app_directory, download_directory)
